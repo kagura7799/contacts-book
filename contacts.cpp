@@ -6,8 +6,8 @@
 std::map<std::string, std::string> contacts {};
 
 void printContacts() {
-    for (auto c : contacts) {
-        std::cout << c.first << " | "   << c.second << std::endl;
+    for (auto const& contact : contacts) {
+        std::cout << contact.first << " | "  << contact.second << std::endl;
         std::cout << std::endl;
     }
 }
@@ -25,12 +25,34 @@ void Contact::addContact() {
         std::cerr << "Error: " << e.what() << std::endl;
         return;
     }
-    std::cout << "Добавлено." << std::endl;
+    std::cout << "Добавлено. \n" << std::endl;
     printContacts();
 }
 
 void Contact::findContact() {
-    // Implement the findContact method
+    if (contacts.size() == 0) {
+        std::cout << "Список контактов пуст. \n" << std::endl;
+        return;
+    }
+
+    std::cout << "Поиск контакта по имени." << std::endl;
+    std::string findName;
+    std::cin >> findName;
+    std::cout << std::endl;
+
+
+    bool find = false;
+    for (auto const& contact : contacts) {
+        if (findName == contact.first) {
+            find = true;
+            std::cout << contact.first << " | "  << contact.second << std::endl;
+            std::cout << std::endl;
+        }
+    }
+
+    if (!find) {
+        std::cout << "Ничего не найдено." << std::endl;
+    }
 }
 
 void Contact::deleteContact() {
