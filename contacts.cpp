@@ -40,7 +40,6 @@ void Contact::findContact() {
     std::cin >> findName;
     std::cout << std::endl;
 
-
     bool find = false;
     for (auto const& contact : contacts) {
         if (findName == contact.first) {
@@ -56,7 +55,17 @@ void Contact::findContact() {
 }
 
 void Contact::deleteContact() {
-    // Implement the deleteContact method
+    std::cout << "Удаление контакта по имени." << std::endl;
+    std::string deleteName;
+    std::cin >> deleteName;
+
+    auto it = contacts.find(deleteName);
+    if (it != contacts.end()) {
+        contacts.erase(it);
+        std::cout << "Контакт '" << deleteName << "' удален.\n" << std::endl;
+    } else {
+        std::cout << "Контакт с именем '" << deleteName << "' не найден.\n" << std::endl;
+    }
 }
 
 void Contact::changeContact() {
