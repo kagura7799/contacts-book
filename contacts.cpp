@@ -15,7 +15,7 @@ void printContacts() {
 void Contact::addContact() {
     std::string name;
     std::string phone;
-    std::cout << "Введите имя и номер телефона нового контакта " << std::endl;
+    std::cout << "Введите имя и номер телефона нового контакта." << std::endl;
     std::cin >> name;
     std::cin >> phone;
 
