@@ -6,6 +6,10 @@
 std::map<std::string, std::string> contacts {};
 
 void printContacts() {
+    if (contacts.size() == 0) {
+        std::cout << "Список контактов пуст. \n" << std::endl;
+    }
+    
     for (auto const& contact : contacts) {
         std::cout << contact.first << " | "  << contact.second << std::endl;
         std::cout << std::endl;
@@ -52,7 +56,7 @@ void Contact::findContact() {
     if (!find) {
         std::cout << "Ничего не найдено." << std::endl;
     }
-}
+}   
 
 void Contact::deleteContact() {
     std::cout << "Удаление контакта по имени." << std::endl;
@@ -63,11 +67,31 @@ void Contact::deleteContact() {
     if (it != contacts.end()) {
         contacts.erase(it);
         std::cout << "Контакт '" << deleteName << "' удален.\n" << std::endl;
+        printContacts();
     } else {
         std::cout << "Контакт с именем '" << deleteName << "' не найден.\n" << std::endl;
     }
 }
 
 void Contact::changeContact() {
-    // Implement the changeContact method
+    std::cout << "Изменение имени контакта." << std::endl;
+    
+    std::string oldName;
+    std::cout << "Введите старое имя контакта: ";
+    std::cin >> oldName;
+
+    auto it = contacts.find(oldName);
+    if (it != contacts.end()) {
+        std::string newName;
+        std::cout << "Введите новое имя контакта: ";
+        std::cin >> newName;
+
+        contacts[newName] = it->second;
+        contacts.erase(it);
+
+        std::cout << "Имя контакта успешно изменено.\n" << std::endl;
+        printContacts();
+    } else {
+        std::cout << "Контакт с именем '" << oldName << "' не найден.\n" << std::endl;
+    }
 }
